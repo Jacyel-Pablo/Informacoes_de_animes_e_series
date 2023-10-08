@@ -1,0 +1,77 @@
+*{
+    padding: 0px;
+    margin: 0px 0px;
+}
+html{
+    width: 100%;
+    height: 100%;
+}
+body{
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 30% 40% 30%;
+}
+
+/* Coluna 1 do grid */
+
+.github{
+    border: 2px solid;
+    height: 50%;
+    width: 70%;
+    margin: 35% 15%;
+}
+.github1{
+    height: 35%;
+
+}
+.github__img{
+    width: 60%;
+    height: 40%;
+    margin: 0% 20%;
+}
+a{
+    color: black;
+}
+
+/* Coluna 2 do grid */
+.busca{
+    height: 100%;
+    border-bottom: 10px;
+    border-color: red;
+}
+.nome{
+    margin-left: 20%;
+    height: 5%;
+    width: 42%;
+}
+.enviar{
+    height: 5.5%;
+    width: 15%;
+}
+.poster{
+    height: 70%;
+    width: 70%;
+    margin: 5% 15%;
+    display: block;
+}
+.poster1{
+    height: 55%;
+}
+.nome__filme{
+    margin-top: 2%;
+    text-align: center;
+}
+.saber__mais{
+    display: block;
+    margin: 0px 44%;
+    text-align: center;
+}
+
+/* instragam */
+
+.instragam__img{
+    width: 50%;
+    height: 40%;
+    margin: 0% 25%;
+}
