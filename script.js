@@ -8,57 +8,67 @@ var infor_ativo = false
 function pos()
 {
     const nome = document.getElementById('nome').value
+
+    // verificar ser já existe o saber mais
+    existe(document.getElementById('saber__mais'))
+
+    // faz a requisição a API
     
-    try{
-        let resposta = fetch("https://www.omdbapi.com/?i=tt3896198&apikey=e83a1b92&t=" + nome)
-        .then(respones=>respones.json())
-        .then(dados => {
-            console.log(dados)
-            imagem.src = dados.Poster
+    let resposta = fetch("https://www.omdbapi.com/?i=tt3896198&apikey=e83a1b92&t=" + nome)
+    .then(respones=>respones.json())
+    .then(dados => {
+        console.log(dados)
+        imagem.src = dados.Poster
 
-            // verifica se o contado e true o false se for true ele apagar as informações do filme
-            if (contado) {
-                document.getElementById('nome__filme').remove()
-                document.getElementById('lancamento').remove()
+        // verifica se o contado e true o false se for true ele apagar as informações do filme
+        if (contado) {
+            existe(document.getElementById('nome__filme'))
+            existe(document.getElementById('lancamento'))
 
-                if (infor_ativo) {
-                    document.getElementById('enredo').remove()
-                    document.getElementById('autores').remove()
-                    document.getElementById('escritores').remove()
-                    document.getElementById('genero').remove()
-                    document.getElementById('tempo').remove()
-                    document.getElementById('tipo').remove()
-                }
+            if (infor_ativo) {
+                document.getElementById('enredo').remove()
+                document.getElementById('autores').remove()
+                document.getElementById('escritores').remove()
+                document.getElementById('genero').remove()
+                document.getElementById('tempo').remove()
+                document.getElementById('tipo').remove()
             }
+        }
 
-            contado = true
+        contado = true
 
-            // nome do filme completo
-            const nome_filme = criar_elemento('p', busca)
-            nome_filme.classList.add('nome__filme')
-            nome_filme.id = 'nome__filme'
-            nome_filme.innerHTML = `Nome completo: ${dados.Title}`
+        // nome do filme completo
+        const nome_filme = criar_elemento('p', busca)
+        nome_filme.classList.add('nome__filme')
+        nome_filme.id = 'nome__filme'
+        nome_filme.innerHTML = `Nome completo: ${dados.Title}`
 
-            // lançamento
-            const lancamento = criar_elemento('p', busca)
-            lancamento.classList.add('nome__filme')
-            lancamento.id = 'lancamento'
+        // lançamento
+        const lancamento = criar_elemento('p', busca)
+        lancamento.classList.add('nome__filme')
+        lancamento.id = 'lancamento'
 
-            lancamento.innerHTML = `Data de lançamento: ${dados.Released}`
+        lancamento.innerHTML = `Data de lançamento: ${dados.Released}`
 
-            // botão saber mais
-            const saber_mais = criar_elemento('input', busca)
-            saber_mais.type = 'button'
-            saber_mais.value = 'Saber Mais'
-            saber_mais.classList.add('saber__mais')
-            saber_mais.id = 'saber__mais'
-            
-            saber_mais.addEventListener('click', () => {
-                informacoes(dados)
-            })
+        // botão saber mais
+        const saber_mais = criar_elemento('input', busca)
+        saber_mais.type = 'button'
+        saber_mais.value = 'Saber Mais'
+        saber_mais.classList.add('saber__mais')
+        saber_mais.id = 'saber__mais'
+        
+        saber_mais.addEventListener('click', () => {
+            informacoes(dados)
         })
-    } catch (erro) {
-        console.log("erro")
+    })
+}
+
+// função para ver se um elemento existe se não existe ele apagar
+
+function existe(elemento)
+{
+    if (elemento != null) {
+        elemento.remove()
     }
 }
 
