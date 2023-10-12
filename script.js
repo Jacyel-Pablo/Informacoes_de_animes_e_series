@@ -1,16 +1,14 @@
-const imagem = document.getElementById("imagem")
+const imagem = document.getElementById("poster")
 const corpo = document.getElementById('corpo')
 const busca = document.getElementById('busca')
 
 var contado = false
-var infor_ativo = false
 
-function pos()
+function informacoes()
 {
     const nome = document.getElementById('nome').value
-
-    // verificar ser já existe o saber mais
-    existe(document.getElementById('saber__mais'))
+    const infors_texto = document.getElementById('infors__texto')
+    const section_text1 = document.getElementById('section__text1')
 
     // faz a requisição a API
     
@@ -18,52 +16,132 @@ function pos()
     .then(respones=>respones.json())
     .then(dados => {
         console.log(dados)
-        imagem.src = dados.Poster
+        if (dados.Poster != undefined) {
+            imagem.src = dados.Poster
+        } else {
+            imagem.src = 'assests/Poster não encontrado.png'
+        }
 
         // verifica se o contado e true o false se for true ele apagar as informações do filme
         if (contado) {
-            existe(document.getElementById('nome__filme'))
-            existe(document.getElementById('lancamento'))
+            existe(document.getElementById('li__filme'))
+            existe(document.getElementById('li__lancamento'))
+            existe(document.getElementById('enredo'))
+            existe(document.getElementById('section__text2'))
+            existe(document.getElementById('li__autores'))
+            existe(document.getElementById('li__escritores'))
+            existe(document.getElementById('li__diretores'))
+            existe(document.getElementById('li__generos'))
+            existe(document.getElementById('li__tempo'))
+            existe(document.getElementById('li__tipo'))
 
-            if (infor_ativo) {
-                document.getElementById('enredo').remove()
-                document.getElementById('autores').remove()
-                document.getElementById('escritores').remove()
-                document.getElementById('genero').remove()
-                document.getElementById('tempo').remove()
-                document.getElementById('tipo').remove()
-            }
         }
 
         contado = true
 
+        // criar o li aonde o nome do filme vai ficar
+        const li_filme = criar_elemento('li', section_text1)
+        li_filme.id = 'li__filme'
+
         // nome do filme completo
-        const nome_filme = criar_elemento('p', busca)
+        const nome_filme = criar_elemento('p', li_filme)
         nome_filme.classList.add('nome__filme')
         nome_filme.id = 'nome__filme'
-        nome_filme.innerHTML = `Nome completo: ${dados.Title}`
+
+        diferente(nome_filme, 'N/A', `Nome completo: `, dados.Title)
+
+        // criar o li aonde o lançamento vai ficar vai está
+        const li_lancamento = criar_elemento('li', section_text1)
+        li_lancamento.id = 'li__lancamento'
 
         // lançamento
-        const lancamento = criar_elemento('p', busca)
+        const lancamento = criar_elemento('p', li_lancamento)
         lancamento.classList.add('nome__filme')
         lancamento.id = 'lancamento'
 
-        lancamento.innerHTML = `Data de lançamento: ${dados.Released}`
+        diferente(lancamento, 'N/A', `Data de lançamento: `, dados.Released)
 
-        // botão saber mais
-        const saber_mais = criar_elemento('input', busca)
-        saber_mais.type = 'button'
-        saber_mais.value = 'Saber Mais'
-        saber_mais.classList.add('saber__mais')
-        saber_mais.id = 'saber__mais'
-        
-        saber_mais.addEventListener('click', () => {
-            informacoes(dados)
-        })
+        // Aqui e o enredo do filme ou serie
+        let enredo = criar_elemento('h2', infors_texto)
+        enredo.classList.add('enredo')
+        enredo.id = 'enredo'
+    
+        diferente(enredo, 'N/A', `Enredo: `, dados.Plot)
+
+        // Vamos criar uma segunda lista com id section__text2
+        const section_text2 = criar_elemento('ul', infors_texto)
+        section_text2.id = 'section__text2'
+
+        // criar o li dos autores
+        const li_autores = criar_elemento('li', section_text2)
+        li_autores.id = 'li__autores'
+
+        // Autores
+        let autores = criar_elemento('p', li_autores)
+        autores.classList.add('texto_tamanho')
+        autores.id = 'autores'
+    
+        diferente(autores, 'N/A', `Autores: `, dados.Actors)
+
+        // criar o li dos escritores
+        const li_escritores = criar_elemento('li', section_text2)
+        li_escritores.id = 'li__escritores'
+
+        // mostra os escrito
+        let escrito = criar_elemento('p', li_escritores)
+        escrito.classList.add('texto_tamanho')
+        escrito.id = 'escritores'
+    
+        diferente(escrito, 'N/A', `Escritores: `, dados.Writer)
+
+        // criar o li dos diretores da obra
+        const li_diretores = criar_elemento('li', section_text2)
+        li_diretores.id = 'li__diretores'
+
+        // direto da obra
+        let direto = criar_elemento('p', li_diretores)
+        direto.classList.add('texto_tamanho')
+        direto.id = 'diretor'
+    
+        diferente(direto, 'N/A', `Diretores: `, dados.Director)
+
+        // criar o li dos generos da obra
+        const li_generos = criar_elemento('li', section_text2)
+        li_generos.id = 'li__generos'
+
+        // genero
+        let genero = criar_elemento('p', li_generos)
+        genero.classList.add('texto_tamanho')
+        genero.id = 'genero'
+    
+        diferente(genero, 'N/A', `Genero: `, dados.Genre)
+
+        // criar o li que vai mostrar o tempo da obra
+        const li_tempo = criar_elemento('li', section_text2)
+        li_tempo.id = 'li__tempo'
+
+        // tempo
+        let tempo = criar_elemento('p', li_tempo)
+        tempo.classList.add('nome__filme')
+        tempo.id = 'tempo'
+    
+        diferente(tempo, 'N/A', `Tempo: `, dados.Runtime)
+
+        // criar o li que vai mostrar o tipo da animação
+        const li_tipo = criar_elemento('li', section_text2)
+        li_tipo.id = 'li__tipo'
+    
+        // tipo da animação
+        let tipo = criar_elemento('p', li_tipo)
+        tipo.classList.add('nome__filme')
+        tipo.id = 'tipo'
+    
+        diferente(tipo, 'N/A', `Tipo: `, dados.Type)
+    
     })
 }
 
-// função para ver se um elemento existe se não existe ele apagar
+// função para ver se um elemento existe se existe ele apagar
 
 function existe(elemento)
 {
@@ -81,111 +159,16 @@ function criar_elemento(elemento, local)
     return elemento
 }
 
-// ser elemento for diferente da variavel igual escreva a string em elemento
+// ser elemento for diferente da variavel igual e não for undefined escreva a string em elemento
 
 function diferente(elemento, igual, string, json)
 {
-    if (igual != json) {
+    if (json == undefined) {
+        elemento.innerHTML = string + 'Informação não encontrada'
+        elemento.style.color = 'red'
+
+    } else if (igual != json) {
         elemento.innerHTML = string + json
+
     }
-}
-
-function informacoes(arquivo_json)
-{
-    imagem.classList.add('poster1')
-    let github = document.getElementById('github')
-    let instragam = document.getElementById('instragam')
-
-    github.classList.add('github1')
-    instragam.classList.add('github1')
-
-    infor_ativo = true
-
-    document.getElementById('saber__mais').remove()
-
-    // tempo
-    let tempo = criar_elemento('p', busca)
-    tempo.classList.add('nome__filme')
-    tempo.id = 'tempo'
-
-    diferente(tempo, 'N/A', `Tempo: `, arquivo_json.Runtime)
-
-    // tipo da animação
-
-    let tipo = criar_elemento('p', busca)
-    tipo.classList.add('nome__filme')
-    tipo.id = 'tipo'
-
-    diferente(tipo, 'N/A', `Tipo: `, arquivo_json.Type)
-
-    // Aqui e o enredo do filme ou serie
-    let enredo = criar_elemento('p', busca)
-    enredo.classList.add('nome__filme')
-    enredo.id = 'enredo'
-
-    diferente(enredo, 'N/A', `Enredo: `, arquivo_json.Plot)
-
-    // genero
-
-    let genero = criar_elemento('p', busca)
-    genero.classList.add('nome__filme')
-    genero.id = 'genero'
-
-    diferente(genero, 'N/A', `Genero: `, arquivo_json.Genre)
-
-    // Autores
-
-    let autores = criar_elemento('p', busca)
-    autores.classList.add('nome__filme')
-    autores.id = 'autores'
-
-    diferente(autores, 'N/A', `Autores: `, arquivo_json.Actors)
-
-    // mostra os escrito
-
-    let escrito = criar_elemento('p', busca)
-    escrito.classList.add('nome__filme')
-    escrito.id = 'escritores'
-
-    diferente(escrito, 'N/A', `Escritores: `, arquivo_json.Writer)
-
-    // direto da obra
-
-    let direto = criar_elemento('p', busca)
-    direto.classList.add('nome__filme')
-    direto.id = 'direto'
-
-    diferente(direto, 'N/A', `Diretores: `, arquivo_json.Director)
-
-    // // botão mostrar menos
-
-    let mostrar_menos = criar_elemento('input', busca)
-    mostrar_menos.type = 'button'
-    mostrar_menos.value = 'Mostrar Menos'
-    mostrar_menos.classList.add('saber__mais')
-
-    mostrar_menos.addEventListener('click', () => {
-        // apagando botão mostrar menos
-        mostrar_menos.remove()
-
-        // apagar elementos criados pelo saber mais
-        document.getElementById('enredo').remove()
-        document.getElementById('autores').remove()
-        document.getElementById('escritores').remove()
-        document.getElementById('genero').remove()
-        document.getElementById('tempo').remove()
-        document.getElementById('tipo').remove()
-
-        // rencriando botão saber mais
-
-        const saber_mais = criar_elemento('input', busca)
-        saber_mais.type = 'button'
-        saber_mais.value = 'Saber Mais'
-        saber_mais.classList.add('saber__mais')
-        saber_mais.id = 'saber__mais'
-        
-        saber_mais.addEventListener('click', () => {
-            informacoes(arquivo_json)
-        })
-    })
 }

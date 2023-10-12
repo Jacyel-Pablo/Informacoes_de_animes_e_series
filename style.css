@@ -1,77 +1,82 @@
 *{
     padding: 0px;
     margin: 0px 0px;
+    box-sizing: border-box;
 }
 html{
-    width: 100%;
     height: 100%;
+    width: 100%;
 }
 body{
+    height: 100%;
     width: 100%;
-    height: 100%;
-    display: grid;
-    grid-template-columns: 30% 40% 30%;
+    background-color: black;
 }
-
-/* Coluna 1 do grid */
-
-.github{
+:root{
+    --cinza: rgb(155, 155, 155);
+}
+h1{
+    color: var(--cinza);
+    font-size: 250%;
+    margin: 1% 0%;
+    text-align: center;
+}
+nav{
+    height: 20%;
     border: 2px solid;
-    height: 50%;
-    width: 70%;
-    margin: 35% 15%;
 }
-.github1{
-    height: 35%;
-
+hr{
+    border-color: var(--cinza);
 }
-.github__img{
-    width: 60%;
-    height: 40%;
-    margin: 0% 20%;
-}
-a{
-    color: black;
-}
-
-/* Coluna 2 do grid */
 .busca{
-    height: 100%;
-    border-bottom: 10px;
-    border-color: red;
+    height: 40%;
+    display: grid;
+    grid-template-columns: 95% 5%;
+    box-shadow: 0px 2px blue;
 }
-.nome{
-    margin-left: 20%;
-    height: 5%;
-    width: 42%;
+.campo__busca{
+    height: 70%;
+    margin-top: 0.5%;
+    margin-left: 80%;
 }
-.enviar{
-    height: 5.5%;
-    width: 15%;
+.lupa{
+    margin-top: 4%;
+    height: 80%;
+    width: 70%;
+}
+.infors{
+    height: 70%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 30% 70%;
 }
 .poster{
-    height: 70%;
-    width: 70%;
-    margin: 5% 15%;
-    display: block;
+    height: 80%;
+    width: 60%;
+    margin: 10% 20%;
+    color: red;
+    border: 2px solid;
+    border-color: var(--cinza);
 }
-.poster1{
-    height: 55%;
+li{
+    color: var(--cinza);
+    list-style: none;
+    display: inline-block;
+    margin: 4% 2%;
+    font-size: 140%;
 }
-.nome__filme{
-    margin-top: 2%;
-    text-align: center;
+.enredo{
+    color: var(--cinza);
 }
-.saber__mais{
-    display: block;
-    margin: 0px 44%;
-    text-align: center;
+.texto_tamanho{
+    font-size: 70%;
 }
-
-/* instragam */
-
-.instragam__img{
-    width: 50%;
-    height: 40%;
-    margin: 0% 25%;
+.github{
+    margin-left: 90%;
+    margin-top: 0.4%;
+    background-color: white;
+    width: 4%;
+}
+.instragam{
+    width: 4%;
 }

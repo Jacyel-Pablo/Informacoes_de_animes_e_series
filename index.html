@@ -7,24 +7,30 @@
     <title>Informações de animes e series</title>
 </head>
 <body id="corpo">
-    <div class="github" id="github">
-        <img class="github__img" src="https://logos-world.net/wp-content/uploads/2020/11/GitHub-Emblem.png" alt="GitHub">
+    <nav>
+        <h1>Pesquise um filme em ingles</h1>
         <hr>
-        <p>Ser você gostou desse projeto me siga no github <a href="https://github.com/Jacyel-Pablo">Link do github</a></p>
-    </div>
+        <div class="busca">
+            <input type="text" id="nome" class="campo__busca" placeholder="pesquisa">
+            <img src="assests/lupa.png" alt="lupa de busca" class="lupa" onclick="informacoes()">
+        </div>
+    </nav>
 
-    <div class="busca" id="busca">
-        <h1 class="nome__filme">Pesquise um filme em ingles</h1>
-        <img id="imagem" class="poster">
-        <input type="text" id="nome" class="nome">
-        <input type="button" class="enviar" value="Enviar" onclick="pos()">
-    </div>
+    <section class="infors">
+        <img src="assests/Poster.png" alt="Imagem não encontrada" class="poster" id="poster">
+        <div class="infors__texto" id="infors__texto">
+            <ul class="section__text1" id="section__text1">
 
-    <div class="github" id="instragam">
-        <img class="instragam__img" src="https://th.bing.com/th/id/OIP.S4yPgtbBnGn1AtvxAFpPswHaHL?pid=ImgDet&w=500&h=485&rs=1" alt="GitHub">
-        <hr>
-        <p>Ser você gostou desse projeto me siga no instragam <a href="https://www.instagram.com/jacyelpablo/">Link do instragam</a></p>
-    </div>
+            </ul>
+        </div>
+    </section>
+
+    <hr>
+
+    <section>
+        <a href="https://github.com/Jacyel-Pablo" target="_blank">><img src="https://pngimg.com/uploads/github/github_PNG40.png" alt="github" class="github"></a>
+        <a href="https://www.instagram.com/jacyelpablo/" target="_blank"><img src="https://zobika.com/wp-content/uploads/2020/06/instagram-1.png" alt="instragam" class="instragam"></a>
+    </section>
 
     <script src="script.js"></script>
 </body>
